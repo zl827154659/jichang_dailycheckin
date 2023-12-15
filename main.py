@@ -3,6 +3,7 @@ import requests, json, re, os
 session = requests.session()
 # 配置用户名（一般是邮箱）
 email = os.environ.get('EMAIL')
+print('当前登录邮箱：' + email)
 # 配置用户名对应的密码 和上面的email对应上
 passwd = os.environ.get('PASSWD')
 # server酱
@@ -22,8 +23,8 @@ data = {
 }
 try:
     print('进行登录...')
-    print('当前登录邮箱：' + email)
     response = json.loads(session.post(url=login_url,headers=header,data=data).text)
+    print('登录成功!')
     print(response['msg'])
     # 获取账号名称
     info_html = session.get(url=info_url,headers=header).text
